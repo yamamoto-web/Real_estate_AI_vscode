@@ -27,7 +27,7 @@ async def chat(request: Request, user_input: str = Form(...)):
 async def ask_chatgpt(message: str) -> str:
     try:
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "あなたは親切な不動産アドバイザーです。"},
                 {"role": "user", "content": message}

@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>プロトタイプ</title>
+    <title>不動産AIチャット</title>
 </head>
 <body>
-    <h1>FastAPI プロトタイプ</h1>
-    <form method="post">
-        <input type="text" name="user_input" placeholder="メッセージを入力">
+    <h1>住まい相談チャット</h1>
+    <form method="post" action="/chat">
+        <textarea name="user_input" rows="4" cols="50" placeholder="例：ペット可で駅近くの物件は？"></textarea><br>
         <button type="submit">送信</button>
     </form>
 
-    {% if answer %}
-        <h2>サーバーの応答:</h2>
-        <p>{{ answer }}</p>
+    {% if response %}
+        <h2>ChatGPTの回答:</h2>
+        <div style="white-space: pre-wrap; border: 1px solid #ccc; padding: 10px;">
+            {{ response }}
+        </div>
     {% endif %}
 </body>
 </html>

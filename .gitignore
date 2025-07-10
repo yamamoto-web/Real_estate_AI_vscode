@@ -4,3 +4,6 @@
 # Python
 __pycache__/
 *.pyc
+
+# 非公開ファイル
+.env

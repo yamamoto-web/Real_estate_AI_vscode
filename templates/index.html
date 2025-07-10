@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>プロトタイプ</title>
+</head>
+<body>
+    <h1>FastAPI プロトタイプ</h1>
+    <form method="post">
+        <input type="text" name="user_input" placeholder="メッセージを入力">
+        <button type="submit">送信</button>
+    </form>
+
+    {% if answer %}
+        <h2>サーバーの応答:</h2>
+        <p>{{ answer }}</p>
+    {% endif %}
+</body>
+</html>

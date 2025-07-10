@@ -1,13 +1,13 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-import openai
+from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
 # 環境変数からAPIキーを読み込む
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -25,11 +25,14 @@ async def chat(request: Request, user_input: str = Form(...)):
 
 # ChatGPT APIを呼び出す処理
 async def ask_chatgpt(message: str) -> str:
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "あなたは親切な不動産コンシェルジュです。"},
-            {"role": "user", "content": message}
-        ]
-    )
-    return response.choices[0].message.content.strip()
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": "あなたは親切な不動産アドバイザーです。"},
+                {"role": "user", "content": message}
+            ]
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        return f"エラーが発生しました: {e}"
